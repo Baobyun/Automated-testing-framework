@@ -1,0 +1,32 @@
+name: UI Automation Testing
+
+on:
+  push:
+    branches: [ "main" ]  # 每次推送到 main 分支时触发
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest  # 使用 Linux 服务器跑测试
+
+    steps:
+    - uses: actions/checkout@v4  # 第一步：把你的代码拉取到服务器上
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'  # 第二步：安装 Python 环境
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt  # 第三步：安装你的 pytest, playwright 等
+
+    - name: Ensure browsers are installed
+      run: playwright install --with-deps chromium  # 第四步：安装 Playwright 浏览器引擎
+
+    - name: Run tests
+      run: |
+        export PYTHONPATH=.
+        pytest --alluredir=allure-results  # 第五步：开跑！
