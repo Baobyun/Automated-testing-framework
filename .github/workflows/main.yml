@@ -6,7 +6,6 @@ on:
   pull_request:
     branches: [ "main" ]
 
-# 设置全局环境变量，消除 Node.js 20 弃用警告
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
@@ -34,7 +33,7 @@ jobs:
     - name: Ensure browsers are installed
       run: |
         sudo apt-get update
-        # 注意：Ubuntu 24.04 环境下必须用 libasound2t64，不能用 libasound2
+        # 精准安装 Ubuntu 24.04 运行所需的库
         sudo apt-get install -y libgbm-dev libasound2t64 libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxrandr2 libpango-1.0-0 libcairo2
         python -m playwright install --with-deps chromium
 
@@ -43,14 +42,6 @@ jobs:
         export PYTHONPATH=.
         pytest --alluredir=allure-results
       continue-on-error: true
-
-    - name: Upload Debug Screenshot
-      if: always() # 无论成功失败都尝试上传截图，方便我们对比本地和云端的差异
-      uses: actions/upload-artifact@v4
-      with:
-        name: debug-screenshots
-        path: debug_baidu.png
-        if-no-files-found: ignore
 
     - name: Allure Report Action
       uses: simple-elf/allure-report-action@master
