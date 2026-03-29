@@ -1,0 +1,19 @@
+# Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 虚拟环境
+venv/
+.env
+
+# Pytest 缓存
+.pytest_cache/
+
+# Allure 原始数据和报告 (我们通常不上传本地生成的报告)
+report/
+allure-results/
+
+# PyCharm 配置
+.idea/
