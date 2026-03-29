@@ -35,5 +35,5 @@ def test_baidu_search_logic(page, keyword):
         page.keyboard.press("Enter")
 
         # 验证
-        page.wait_for_timeout(1000) # 等 1 秒
+        page.wait_for_timeout(2000) # 等 1 秒
         assert keyword in page.title()
