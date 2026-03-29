@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 permissions:
-  contents: write  # 允许脚本把报告写回到仓库的分支里
+  contents: write
 
 jobs:
   test:
@@ -28,32 +28,30 @@ jobs:
 
     - name: Ensure browsers are installed
       run: |
-        # 修复截图中的报错：手动安装缺失的系统库并安装浏览器
         sudo apt-get update
-        sudo apt-get install -y libasound2t64
+        # 整合所有的库安装和浏览器安装到一个 run 块中
+        sudo apt-get install -y libgbm-dev libasound2t64 libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxrandr2 libpango-1.0-0 libcairo2 libasound2
         python -m playwright install --with-deps chromium
 
     - name: Run tests
       run: |
         export PYTHONPATH=.
         pytest --alluredir=allure-results
-      continue-on-error: true  # 即使测试用例失败，也要继续生成报告
-
-    - name: Get Allure history
-      uses: actions/checkout@v4
-      if: always()
       continue-on-error: true
-      with:
-        ref: gh-pages
-        path: gh-pages
 
-    - name: Allure Report Action from marketplace
+    - name: Upload Debug Screenshot
+      if: always() # 无论成功失败都尝试上传截图，方便我们对比本地和云端的差异
+      uses: actions/upload-artifact@v4
+      with:
+        name: debug-screenshots
+        path: debug_baidu.png
+        if-no-files-found: ignore
+
+    - name: Allure Report Action
       uses: simple-elf/allure-report-action@master
       if: always()
-      id: allure-report
       with:
         allure_results: allure-results
-        gh_pages: gh-pages
         allure_report: allure-report
         allure_history: allure-history
 
