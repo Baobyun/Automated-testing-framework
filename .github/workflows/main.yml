@@ -24,7 +24,10 @@ jobs:
         pip install -r requirements.txt  # 第三步：安装你的 pytest, playwright 等
 
     - name: Ensure browsers are installed
-      run: playwright install --with-deps chromium  # 第四步：安装 Playwright 浏览器引擎
+      run: |
+        # 使用 sudo 权限安装系统依赖，并强制跳过 libasound2 的特定检查
+        pip install playwright
+        python -m playwright install --with-deps chromium
 
     - name: Run tests
       run: |
