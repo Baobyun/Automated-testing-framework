@@ -2,34 +2,65 @@ name: UI Automation Testing
 
 on:
   push:
-    branches: [ "main" ]  # 每次推送到 main 分支时触发
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
+permissions:
+  contents: write  # 允许脚本把报告写回到仓库的分支里
+
 jobs:
   test:
-    runs-on: ubuntu-latest  # 使用 Linux 服务器跑测试
+    runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4  # 第一步：把你的代码拉取到服务器上
+    - uses: actions/checkout@v4
 
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.10'  # 第二步：安装 Python 环境
+        python-version: '3.10'
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt  # 第三步：安装你的 pytest, playwright 等
+        pip install -r requirements.txt
 
     - name: Ensure browsers are installed
       run: |
-        # 使用 sudo 权限安装系统依赖，并强制跳过 libasound2 的特定检查
-        pip install playwright
+        # 修复截图中的报错：手动安装缺失的系统库并安装浏览器
+        sudo apt-get update
+        sudo apt-get install -y libasound2t64
         python -m playwright install --with-deps chromium
 
     - name: Run tests
       run: |
         export PYTHONPATH=.
-        pytest --alluredir=allure-results  # 第五步：开跑！
+        pytest --alluredir=allure-results
+      continue-on-error: true  # 即使测试用例失败，也要继续生成报告
+
+    - name: Get Allure history
+      uses: actions/checkout@v4
+      if: always()
+      continue-on-error: true
+      with:
+        ref: gh-pages
+        path: gh-pages
+
+    - name: Allure Report Action from marketplace
+      uses: simple-elf/allure-report-action@master
+      if: always()
+      id: allure-report
+      with:
+        allure_results: allure-results
+        gh_pages: gh-pages
+        allure_report: allure-report
+        allure_history: allure-history
+
+    - name: Deploy report to Github Pages
+      if: always()
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: gh-pages
+        publish_dir: allure-report
