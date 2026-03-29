@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ "main" ]
 
+# 设置全局环境变量，消除 Node.js 20 弃用警告
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 permissions:
   contents: write
 
@@ -14,7 +18,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout Code
+      uses: actions/checkout@v4
 
     - name: Set up Python
       uses: actions/setup-python@v5
@@ -29,7 +34,7 @@ jobs:
     - name: Ensure browsers are installed
       run: |
         sudo apt-get update
-        # 整合所有的库安装和浏览器安装到一个 run 块中
+        # 安装 Linux UI 测试必备的图形库和依赖
         sudo apt-get install -y libgbm-dev libasound2t64 libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxrandr2 libpango-1.0-0 libcairo2 libasound2
         python -m playwright install --with-deps chromium
 
@@ -40,7 +45,7 @@ jobs:
       continue-on-error: true
 
     - name: Upload Debug Screenshot
-      if: always() # 无论成功失败都尝试上传截图，方便我们对比本地和云端的差异
+      if: always()
       uses: actions/upload-artifact@v4
       with:
         name: debug-screenshots
