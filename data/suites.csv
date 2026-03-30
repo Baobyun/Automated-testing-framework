@@ -4,22 +4,22 @@
         :param page:来自 conftest.py 的浏览器对象
         :param keyword：来自装饰器自动注入的搜索词
         :return:
-        ","7441","test_baidu_search_logic[ChatGPT 4]","test","Mon Mar 30 09:54:49 UTC 2026","passed","Mon Mar 30 09:54:56 UTC 2026","","test_baidu","",""
+        ","5990","test_baidu_search_logic[AI\u4e0e\u88c1\u5458]","test","Mon Mar 30 10:04:29 UTC 2026","passed","Mon Mar 30 10:04:35 UTC 2026","","test_baidu","",""
 "
 
         :param page:来自 conftest.py 的浏览器对象
         :param keyword：来自装饰器自动注入的搜索词
         :return:
-        ","6113","test_baidu_search_logic[Playwright \u81ea\u52a8\u5316\u6559\u7a0b]","test","Mon Mar 30 09:54:57 UTC 2026","passed","Mon Mar 30 09:55:03 UTC 2026","","test_baidu","",""
+        ","7257","test_baidu_search_logic[ChatGPT 4]","test","Mon Mar 30 10:04:09 UTC 2026","passed","Mon Mar 30 10:04:16 UTC 2026","","test_baidu","",""
 "
 
         :param page:来自 conftest.py 的浏览器对象
         :param keyword：来自装饰器自动注入的搜索词
         :return:
-        ","6231","test_baidu_search_logic[AI\u4e0e\u88c1\u5458]","test","Mon Mar 30 09:55:10 UTC 2026","passed","Mon Mar 30 09:55:16 UTC 2026","","test_baidu","",""
+        ","5969","test_baidu_search_logic[Playwright \u81ea\u52a8\u5316\u6559\u7a0b]","test","Mon Mar 30 10:04:16 UTC 2026","passed","Mon Mar 30 10:04:22 UTC 2026","","test_baidu","",""
 "
 
         :param page:来自 conftest.py 的浏览器对象
         :param keyword：来自装饰器自动注入的搜索词
         :return:
-        ","6152","test_baidu_search_logic[Python \u88c5\u9970\u5668\u539f\u7406]","test","Mon Mar 30 09:55:03 UTC 2026","passed","Mon Mar 30 09:55:09 UTC 2026","","test_baidu","",""
+        ","5963","test_baidu_search_logic[Python \u88c5\u9970\u5668\u539f\u7406]","test","Mon Mar 30 10:04:23 UTC 2026","passed","Mon Mar 30 10:04:29 UTC 2026","","test_baidu","",""
