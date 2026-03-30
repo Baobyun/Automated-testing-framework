@@ -9,7 +9,7 @@ def page():
     with sync_playwright() as p:
         # slow_mo=500 动作减速，防止百度识别太快有效规避反爬检测
         browser = p.chromium.launch(
-            headless=False,
+            headless=True,
             slow_mo=500,
             args=["--disable-blink-features=AutomationControlled"] #环境伪装 disable-blink-features 规避反爬检测
         )
