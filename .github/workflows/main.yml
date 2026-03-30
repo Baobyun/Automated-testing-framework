@@ -57,6 +57,8 @@ jobs:
 
     - name: Run tests
       run: |
+        # 每次跑之前，先强行删掉旧的结果文件夹
+        rm -rf allure-results
         export PYTHONPATH=.
         pytest --alluredir=allure-results
       continue-on-error: true
