@@ -29,13 +29,31 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-
+        
     - name: Ensure browsers are installed
       run: |
         sudo apt-get update
-        # 精准安装 Ubuntu 24.04 运行所需的库
-        sudo apt-get install -y libgbm-dev libasound2t64 libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxrandr2 libpango-1.0-0 libcairo2
-        python -m playwright install --with-deps chromium
+        # 1. 手动安装所有必要的系统库，确保包名全部适配 Ubuntu 24.04
+        sudo apt-get install -y \
+          libgbm-dev \
+          libasound2t64 \
+          libnss3 \
+          libatk1.0-0t64 \
+          libatk-bridge2.0-0t64 \
+          libcups2t64 \
+          libdrm2 \
+          libxkbcommon0 \
+          libxcomposite1 \
+          libxdamage1 \
+          libxrandr2 \
+          libpango-1.0-0 \
+          libcairo2 \
+          libvulkan1 \
+          libx11-xcb1
+
+        # 只安装浏览器内核
+        python -m playwright install chromium
+
 
     - name: Run tests
       run: |
