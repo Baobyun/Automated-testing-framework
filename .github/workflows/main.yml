@@ -40,7 +40,7 @@ jobs:
     - name: Run tests
       run: |
         export PYTHONPATH=.
-        pytest --alluredir=allure-results
+        pytest --alluredir=allure-results --video on --screenshot on
       continue-on-error: true
 
     - name: Allure Report Action
