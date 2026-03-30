@@ -1,0 +1,25 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"
+
+        :param page:来自 conftest.py 的浏览器对象
+        :param keyword：来自装饰器自动注入的搜索词
+        :return:
+        ","0","test_baidu_search_logic[Playwright \u81ea\u52a8\u5316\u6559\u7a0b]","test","Mon Mar 30 09:39:44 UTC 2026","broken","Mon Mar 30 09:39:44 UTC 2026","","test_baidu","",""
+"
+
+        :param page:来自 conftest.py 的浏览器对象
+        :param keyword：来自装饰器自动注入的搜索词
+        :return:
+        ","0","test_baidu_search_logic[AI\u4e0e\u88c1\u5458]","test","Mon Mar 30 09:39:44 UTC 2026","broken","Mon Mar 30 09:39:44 UTC 2026","","test_baidu","",""
+"
+
+        :param page:来自 conftest.py 的浏览器对象
+        :param keyword：来自装饰器自动注入的搜索词
+        :return:
+        ","0","test_baidu_search_logic[ChatGPT 4]","test","Mon Mar 30 09:39:43 UTC 2026","broken","Mon Mar 30 09:39:43 UTC 2026","","test_baidu","",""
+"
+
+        :param page:来自 conftest.py 的浏览器对象
+        :param keyword：来自装饰器自动注入的搜索词
+        :return:
+        ","0","test_baidu_search_logic[Python \u88c5\u9970\u5668\u539f\u7406]","test","Mon Mar 30 09:39:44 UTC 2026","broken","Mon Mar 30 09:39:44 UTC 2026","","test_baidu","",""
